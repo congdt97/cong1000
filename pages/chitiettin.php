@@ -17,6 +17,7 @@ $row_mottin = mysqli_fetch_array($mottin);
 <div class="des">
 <?php echo $row_mottin['TomTat'] ?>
 </div>
+
 <div class="chitiet">
 <!--noi dung-->
 <?php echo $row_mottin['Content'] ?>

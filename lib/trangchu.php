@@ -163,4 +163,22 @@ function CapNhatSoLanXem($idTin){
 	mysqli_query($GLOBALS["___mysqli_ston"],$sql);
 }
 
+function TimKiem($tukhoa){
+	$sql = " 
+		SELECT * FROM tin
+		WHERE TieuDe REGEXP '$tukhoa'
+		ORDER BY idTin DESC
+	";
+	return mysqli_query($GLOBALS["___mysqli_ston"],$sql);
+}
+
+function getUser($un, $pa){
+	$sql = " 
+        SELECT * FROM Users
+        WHERE Username = '$un' &&
+        Password = '$pa'
+    ";
+    return mysqli_query($GLOBALS["___mysqli_ston"],$sql);
+}
+
 ?>

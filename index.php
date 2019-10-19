@@ -1,12 +1,44 @@
-<?php 
+<?php
+session_start(); //khởi tạo biến session
+
 require "lib/dbCon.php";
 require "lib/trangchu.php";
+
 if (isset($_GET["p"])) { 
     $p = $_GET["p"];
 }else{
     $p = "";
 }
 ?>
+<?php 
+
+//kiem tra login
+if (isset($_POST["btnLogin"])) { // Nếu btnLogin được gửi lên
+    $un = $_POST["username"];
+    $pa = $_POST["password"];
+    $pa = md5($pa);
+    $user = getUser($un, $pa);
+    if (mysqli_num_rows($user)==1) {
+        //dang nhap dung
+        $row = mysqli_fetch_array($user);
+        $_SESSION["idUser"] = $row['idUser'];
+        $_SESSION["Username"] = $row['Username'];
+        $_SESSION["HoTen"] = $row['HoTen'];
+        $_SESSION["idGroup"] = $row['idGroup'];
+    }
+}
+?>
+
+<?php 
+//Đăng xuất
+if (isset($_POST['btnThoat'])) {
+    unset($_SESSION["idUser"]);
+    unset($_SESSION["Username"]);
+    unset($_SESSION["HoTen"]);
+    unset($_SESSION["idGroup"]);
+}
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -67,6 +99,9 @@ if (isset($_GET["p"])) {
                 case 'chitiettin':
                     require "pages/chitiettin.php";
                     break;
+                case 'timkiem':
+                    require "pages/timkiem.php";
+                    break;
                 default:
                     require "pages/trangchu.php";
                     break;
@@ -75,6 +110,14 @@ if (isset($_GET["p"])) {
             
         </div>
         <div id="content-right">
+        <!-- Form user -->
+        <?php 
+        if ( !isset($_SESSION["idUser"])) { // Nếu chưa đăng nhập
+            require "blocks/formLogin.php"; //require vào login
+        }else{
+            require "blocks/formHello.php"; // Welcame "name"
+        }
+        ?>
 		<!--blocks/cot_phai.php-->
         <?php require "blocks/cot_phai.php"; ?>
         </div>

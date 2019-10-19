@@ -35,7 +35,7 @@ $row_theloai = mysqli_fetch_array($theloai);
                     $row_tinmoinhat = mysqli_fetch_array($tinmoinhat);
                     ?>
 
-                    <h3 class="title" ><a href="./index.php?p=chitiettin$idTin=<?php echo $row_tinmoinhat['idTin'] ?>"> <?php echo $row_tinmoinhat['TieuDe'] ?></a></h3>
+                    <h3 class="title" ><a href="./index.php?p=chitiettin&idTin=<?php echo $row_tinmoinhat['idTin'] ?>"> <?php echo $row_tinmoinhat['TieuDe'] ?></a></h3>
                     <img class="images_news" src="upload/tintuc/<?php echo $row_tinmoinhat['urlHinh'] ?>" align="left" />
                     <div class="des"><?php echo $row_tinmoinhat['TomTat'] ?></div>
                     <div class="clear"></div>
