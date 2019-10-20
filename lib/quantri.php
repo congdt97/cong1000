@@ -19,6 +19,7 @@ function ChiTietTheLoai($idTL){
 	$sql = "
 			SELECT * FROM theloai
 			WHERE idTL = '$idTL'
+			ORDER BY idTL DESC
 	";
 	return mysqli_query($GLOBALS["___mysqli_ston"],$sql);
 }
